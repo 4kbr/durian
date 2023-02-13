@@ -10,7 +10,7 @@ export default function HomePage(): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>
+      <main className="relative h-[200vh] bg-[#e7ecee]">
         <Landing />
       </main>
     </div>
