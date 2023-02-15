@@ -51,4 +51,17 @@ export default defineType({
       type: 'blockContent',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      media: 'image',
+    },
+    prepare(selection) {
+      const {title, media} = selection
+      return {
+        title,
+        media: media[0],
+      }
+    },
+  },
 })
