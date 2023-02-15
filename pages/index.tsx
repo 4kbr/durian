@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Landing from "@/components/Landing";
+import { fetchCategories } from "@/utils/fetchCategories";
 import { Tab } from "@headlessui/react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -89,7 +90,10 @@ export default function HomePage(): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // const categories = await fetchCategories();
+
   return {
-    props: {},
+    props: {
+      categories: "categories",
+    },
   };
 };
