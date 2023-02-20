@@ -41,18 +41,19 @@ export default function HomePage({ categories, products }: Props): JSX.Element {
             New Promos
           </h1>
           <Tab.Group>
-            <Tab.List className="flex rounded-xl p-1 justify-center items-center mx-10 md:mx-16 lg:mx-20">
+            <Tab.List className="flex rounded-xl p-1 justify-center items-center mx-10 sm:mx-[20%]">
               {categories.map((category) => (
                 <Tab
                   key={category._id}
                   id={category._id}
                   className={({ selected }) =>
-                    ` w-full py-2.5 text-sm font-medium leading-5
-                      focus:outline-none border-b-2 rounded-t-md  
+                    ` whitespace-nowrap rounded-t-lg py-3 px-5 text-sm font-light
+                    outline-none md:py-4 md:px-6 md:text-base
                       ${
                         selected
-                          ? "bg-white bg-opacity-20 text-white borderGradient border-none"
-                          : "text-gray-400 hover:bg-white/[0.12] hover:text-white border-[#35383c] hover:border-[#565656]"
+                          ? "bg-[#35383c] text-white borderGradient"
+                          : `text-gray-400 hover:bg-white/[0.12] hover:text-white
+                          border-b-2 border-[#35383c] hover:border-[#565656]`
                       }
                     `
                   }
@@ -61,7 +62,7 @@ export default function HomePage({ categories, products }: Props): JSX.Element {
                 </Tab>
               ))}
             </Tab.List>
-            <Tab.Panels className="flex mt-2 justify-center items-center">
+            <Tab.Panels className="mx-auto max-w-fit pt-10 sm:px-4">
               {categories.map((category, idx) => (
                 <Tab.Panel
                   key={category._id}
