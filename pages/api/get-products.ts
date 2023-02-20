@@ -3,21 +3,21 @@ import { groq } from "next-sanity";
 import { sanityClient } from "@/sanity";
 
 /// use grog query
-const query = groq`*[_type == "category"]{
+const query = groq`*[_type=="product"]{
   _id,
-  ...
-}
-`;
+  slug,
+  title
+}|order(_createdAt asc)`;
 
 type Data = {
   status: number;
   message: string;
   data: {
-    categories: Category[];
+    categories: Product[];
   };
 };
 
-export default async function handler(
+export default async function post(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
