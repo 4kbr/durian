@@ -5,7 +5,7 @@ export const fetchProducts: () => Promise<Product[]> = async () => {
     );
     const data = await res.json();
     const products: Product[] = data.result.products;
-    console.log({ data });
+    // console.log({ data });
     return products;
   } catch (error) {
     throw error;

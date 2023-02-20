@@ -1,17 +1,24 @@
 import Header from "@/components/Header";
 import Landing from "@/components/Landing";
+import Product from "@/components/Product";
 import { fetchCategories } from "@/utils/fetchCategories";
+import { fetchProducts } from "@/utils/fetchProducts";
 import { Tab } from "@headlessui/react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 interface Props {
   categories: Category[];
+  products: Product[];
 }
 
-export default function HomePage({ categories }: Props): JSX.Element {
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
+export default function HomePage({ categories, products }: Props): JSX.Element {
+  // console.log({ products });
+
+  function showProducts(category: Category) {
+    return products
+      .filter((product) => product.category._ref === category._id)
+      .map((product) => <Product key={product._id} product={product} />);
   }
 
   // console.log({ categories });
@@ -54,18 +61,17 @@ export default function HomePage({ categories }: Props): JSX.Element {
                 </Tab>
               ))}
             </Tab.List>
-            {/* <Tab.Panels className="mt-2">
-              {categories.map((posts, idx) => (
+            <Tab.Panels className="flex mt-2 justify-center items-center">
+              {categories.map((category, idx) => (
                 <Tab.Panel
-                  key={posts._id}
-                  id={posts._id}
-                  className={
-                    "rounded-xl bg-white p-3" +
-                    "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
-                  }
-                ></Tab.Panel>
+                  key={category._id}
+                  id={category._id}
+                  className={"tabPanel"}
+                >
+                  {showProducts(category)}
+                </Tab.Panel>
               ))}
-            </Tab.Panels> */}
+            </Tab.Panels>
           </Tab.Group>
         </div>
       </section>
@@ -77,9 +83,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
   const categories: Category[] = await fetchCategories();
+  const products: Product[] = await fetchProducts();
   return {
     props: {
       categories,
+      products,
     },
   };
 };

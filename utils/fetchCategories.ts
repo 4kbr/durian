@@ -5,7 +5,7 @@ export const fetchCategories: () => Promise<Category[]> = async () => {
     );
     const data = await res.json();
     const categories: Category[] = data.data.categories;
-    console.log({ data });
+    // console.log({ data });
     return categories;
   } catch (error) {
     throw error;

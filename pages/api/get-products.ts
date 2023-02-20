@@ -5,15 +5,14 @@ import { sanityClient } from "@/sanity";
 /// use grog query
 const query = groq`*[_type=="product"]{
   _id,
-  slug,
-  title
+  ...
 }|order(_createdAt asc)`;
 
 type Data = {
   status: number;
   message: string;
-  data: {
-    categories: Product[];
+  result: {
+    products: Product[];
   };
 };
 
@@ -22,10 +21,10 @@ export default async function post(
   res: NextApiResponse<Data>
 ) {
   /// fetch sanity api using groq
-  const categories = await sanityClient.fetch(query);
+  const products = await sanityClient.fetch(query);
   res.status(200).json({
     status: 200,
     message: "successfully transfer data",
-    data: { categories },
+    result: { products },
   });
 }
