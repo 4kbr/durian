@@ -6,6 +6,7 @@ interface Props {
   product: Product;
 }
 export default function Product({ product }: Props) {
+  const addItemToBasket = () => {};
   return (
     <div
       className="flex h-fit w-[320px] select-none flex-col space-y-3 
@@ -26,7 +27,7 @@ export default function Product({ product }: Props) {
           <p>${product.price}</p>
         </div>
 
-        <div className="boxIcon">
+        <div className="boxIcon" onClick={addItemToBasket}>
           <ShoppingCartIcon className="text-white h-8 w-8" />
         </div>
       </div>
