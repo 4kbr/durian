@@ -2,22 +2,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
 // Define a type for the slice state
-interface CounterState {
-  value: number;
+
+export interface BasketState {
+  items: Product[];
 }
 
 // Define the initial state using that type
-const initialState: CounterState = {
-  value: 0,
+const initialState: BasketState = {
+  items: [],
 };
 
-export const counterSlice = createSlice({
-  name: "counter",
+export const basketSlice = createSlice({
+  name: "basket",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    increment: (state: BasketState, action: PayloadAction<Product>) => {
+      state.items = [...state.items, action.payload];
     },
     decrement: (state) => {
       state.value -= 1;
@@ -29,9 +30,9 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount } = basketSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counter.value;
 
-export default counterSlice.reducer;
+export default basketSlice.reducer;
